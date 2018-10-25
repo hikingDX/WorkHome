@@ -18,5 +18,10 @@ from django.urls import path, re_path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('^', include('VersionInfoApp.urls')),  # 包含hiking
+    # re_path('^', include('VersionInfoApp.urls')),  # 包含hiking
+    re_path('^tinymce/', include('tinymce.urls')),
+    re_path('^user/', include('apps.user.urls', namespace='user')),
+    re_path('^cart/', include('apps.cart.urls', namespace='cart')),
+    re_path('^order/', include('apps.order.urls', namespace='order')),
+    re_path('^', include('apps.goods.urls', namespace='goods')),
 ]
