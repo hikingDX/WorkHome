@@ -2,7 +2,7 @@
   "name": "appfront",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "God0g <812385828@qq.com>",
+  "author": "lizhongli <644495950@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
