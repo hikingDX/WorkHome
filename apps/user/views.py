@@ -13,6 +13,8 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 from django.core.mail import send_mail
 
+from celery_tasks.tasks import send_register_active_email
+
 
 def register(request):
     if request.method == 'GET':
@@ -99,15 +101,15 @@ class RegisterView(View):
         info = {'confirm': user.id}
         token = serializer.dumps(info)
         token = token.decode()
-        # 发邮件
-        subject = '天天生鲜欢迎信息'
-        message = ''
-        html_msg = '<a href="http://127.0.0.1:8000/user/active/%s">hhh</a>' % (token)
-        sender = settings.EMAIL_FROM
-        reciver = [email]
-        send_mail(subject, message, sender, reciver, html_message=html_msg)
+        # # 发邮件
+        # subject = '天天生鲜欢迎信息'
+        # message = ''
+        # html_msg = '<a href="http://127.0.0.1:8000/user/active/%s">hhh</a>' % (token)
+        # sender = settings.EMAIL_FROM
+        # reciver = [email]
+        # send_mail(subject, message, sender, reciver, html_message=html_msg)
+        send_register_active_email.delay(email, user.username, token)
         # 4.返回应答
-
         return redirect(reverse('goods:index'))
 
 
