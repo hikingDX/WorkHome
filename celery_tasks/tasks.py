@@ -13,7 +13,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WorkHome.settings')
 django.setup()
 
-app = Celery('celery_tasks.tasks', broker='redis://192.168.1.9:6379/8')
+app = Celery('celery_tasks.tasks', broker='redis://192.168.46.128:6379/8')
 
 
 # 定义任务函数
@@ -22,7 +22,7 @@ def send_register_active_email(to_email, username, token):
     # 发邮件
     subject = '天天生鲜欢迎信息'
     message = ''
-    html_msg = '<h1>%s</h1><a href="http://127.0.0.1:8001/user/active/%s">hhh</a>' % (username, token)
+    html_msg = '<h1>%s</h1><a href="http://127.0.0.1:8000/user/active/%s">hhh</a>' % (username, token)
     sender = settings.EMAIL_FROM
     reciver = [to_email]
     send_mail(subject, message, sender, reciver, html_message=html_msg)

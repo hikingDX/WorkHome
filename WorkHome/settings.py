@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'dailyfresh',
         'USER': 'root',
         'PASSWORD': '987123',
-        'HOST': '192.168.1.9',
+        'HOST': '192.168.46.128',
         'PORT': 3306
     }
 }
@@ -149,3 +149,21 @@ EMAIL_HOST_USER = 'hikingcool@163.com'
 EMAIL_HOST_PASSWORD = '987123hiking'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<hikingcool@163.com>'
+
+# Django的缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://192.168.46.128:6379/9",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# 配置session存储
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+# 配置登录url地址
+LOGIN_URL = '/user/login'
