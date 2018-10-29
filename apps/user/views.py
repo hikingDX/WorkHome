@@ -137,3 +137,17 @@ class ActiveView(View):
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
+
+    def post(self, request):
+        # 接收数据
+        username = request.POST.get('username')
+        password = request.POST.get('pwd')
+        # 校验数据
+        if not all(username,password):
+            return  render(request,'login.html',{'errmsg':'数据不完整'})
+        # 业务逻辑
+        User.objects.get(username = username,password =password)
+
+
+
+
