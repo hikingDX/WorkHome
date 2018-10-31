@@ -20,8 +20,8 @@ REDIS_CACHES_HOME = "redis://%s/9" % HOST_HOME
 REDIS_CACHES_COMP = "redis://%s/9" % HOST_COMP
 REDIS_CELERY_HOME = "redis://%s/8" % HOST_HOME
 REDIS_CELERY_COMP = "redis://%s/8" % HOST_COMP
-FDFS_URL_HOME = 'http://%s:8888' % HOST_HOME
-FDFS_URL_COMP = 'http://%s:80' % HOST_HOME
+FDFS_URL_HOME = 'http://%s:8888/' % HOST_HOME
+FDFS_URL_COMP = 'http://%s:8888/' % HOST_COMP
 FDFS_CLIENT_CONF_HOME = './utils/fdfs/client_home.conf'
 FDFS_CLIENT_CONF_COMP = './utils/fdfs/client.conf'
 
@@ -186,5 +186,4 @@ DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 # 设置fdfs使用的client.conf 文件路径
 FDFS_CLIENT_CONF = FDFS_CLIENT_CONF_HOME if ISHOME else FDFS_CLIENT_CONF_COMP
 # 设置fdfs存储服务器Nginx的url
-# FDFS_URL = 'http://192.168.1.9:8888'
 FDFS_URL = FDFS_URL_HOME if ISHOME else FDFS_URL_COMP
