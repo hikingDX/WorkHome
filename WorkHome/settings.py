@@ -13,6 +13,18 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 
+ISHOME = False
+HOST_HOME = '192.168.1.9'
+HOST_COMP = '192.168.46.129'
+REDIS_CACHES_HOME = "redis://%s/9" % HOST_HOME
+REDIS_CACHES_COMP = "redis://%s/9" % HOST_COMP
+REDIS_CELERY_HOME = "redis://%s/8" % HOST_HOME
+REDIS_CELERY_COMP = "redis://%s/8" % HOST_COMP
+FDFS_URL_HOME = 'http://%s:8888' % HOST_HOME
+FDFS_URL_COMP = 'http://%s:80' % HOST_HOME
+FDFS_CLIENT_CONF_HOME = './utils/fdfs/client_home.conf'
+FDFS_CLIENT_CONF_COMP = './utils/fdfs/client.conf'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -86,7 +98,7 @@ DATABASES = {
         'NAME': 'dailyfresh',
         'USER': 'root',
         'PASSWORD': '987123',
-        'HOST': '192.168.1.9',
+        'HOST': HOST_HOME if ISHOME else HOST_COMP,
         'PORT': 3306
     }
 }
@@ -154,7 +166,7 @@ EMAIL_FROM = '天天生鲜<hikingcool@163.com>'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.1.9:6379/9",
+        "LOCATION": REDIS_CACHES_HOME if ISHOME else REDIS_CACHES_COMP,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -171,7 +183,8 @@ LOGIN_URL = '/user/login'
 # 设置django的文件存储类
 DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 
-#设置fdfs使用的client.conf 文件路径
-FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
-#设置fdfs存储服务器Nginx的url
-FDFS_URL = 'http://192.168.1.9:8888'
+# 设置fdfs使用的client.conf 文件路径
+FDFS_CLIENT_CONF = FDFS_CLIENT_CONF_HOME if ISHOME else FDFS_CLIENT_CONF_COMP
+# 设置fdfs存储服务器Nginx的url
+# FDFS_URL = 'http://192.168.1.9:8888'
+FDFS_URL = FDFS_URL_HOME if ISHOME else FDFS_URL_COMP

@@ -13,7 +13,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WorkHome.settings')
 django.setup()
 
-app = Celery('celery_tasks.tasks', broker='redis://192.168.1.9:6379/8')
+app = Celery('celery_tasks.tasks', broker=settings.REDIS_CELERY_HOME if settings.ISHOME else settings.REDIS_CELERY_COMP)
 
 
 # 定义任务函数

@@ -6,6 +6,7 @@ celery 采坑
 https://blog.csdn.net/qq_30242609/article/details/79047660
 pip install eventlet
 celery -A <mymodule> worker -l info -P eventlet
+celery -A celery_tasks.tasks worker -l info -P eventlet
 mac 没有此坑 直接 celery -A <mymodule> worker -l info
 远程服务器
 安装redis  :  sudo apt-get install redis-server 
