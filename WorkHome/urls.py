@@ -23,5 +23,5 @@ urlpatterns = [
     re_path('^user/', include('apps.user.urls', namespace='user')),
     re_path('^cart/', include('apps.cart.urls', namespace='cart')),
     re_path('^order/', include('apps.order.urls', namespace='order')),
-    re_path('^', include('apps.goods.urls', namespace='goods')),
+    re_path('^goods/', include('apps.goods.urls', namespace='goods')),
 ]
